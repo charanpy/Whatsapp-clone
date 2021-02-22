@@ -1,9 +1,7 @@
-import { Redirect } from "react-router-dom";
-
-const AuthState = (isAuthenticated) => {
+const AuthState = (isAuthenticated, history) => {
   console.log(isAuthenticated);
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    history.push("/");
   }
 };
 

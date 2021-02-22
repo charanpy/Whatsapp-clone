@@ -1,5 +1,12 @@
+import { HomeContainer } from "./Home.style";
+import ChatList from "../../components/ChatList/ChatList";
+
 const Home = () => {
-  return <h1>Home</h1>;
+  return (
+    <HomeContainer>
+      <ChatList />
+    </HomeContainer>
+  );
 };
 
 export default Home;
