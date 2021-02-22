@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { auth } from "./firebase/firebase";
+import { lightTheme, darkTheme } from "./helpers/theme";
+import { setTheme } from "./helpers/localstorage";
 
-const AppState = (checkUserSession) => {
+const AppState = (checkUserSession, setThemeLight, theme) => {
   useEffect(() => {
     const listenToAuth = auth.onAuthStateChanged((snap) => {
       console.log(11, snap);
@@ -19,6 +21,16 @@ const AppState = (checkUserSession) => {
       listenToAuth();
     };
   }, [checkUserSession]);
+
+  useEffect(() => {
+    const userPreferredTheme = setTheme();
+    if (userPreferredTheme && userPreferredTheme === "light") {
+      setThemeLight();
+    }
+  }, [setThemeLight]);
+
+  const AppTheme = () => (theme === "dark" ? darkTheme : lightTheme);
+  return [AppTheme()];
 };
 
 export default AppState;

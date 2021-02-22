@@ -1,4 +1,5 @@
 import { themeActionTypes } from "./theme.type";
+import { setTheme } from "../../helpers/localstorage";
 
 const initialState = {
   theme: "dark"
@@ -7,12 +8,12 @@ const initialState = {
 const themeReducer = (state = initialState, action) => {
   switch (action.type) {
     case themeActionTypes.SET_COLOR_THEME:
-      localStorage.setItem("theme", "dark");
+      setTheme("dark");
       return {
         theme: "dark"
       };
     case themeActionTypes.SET_COLOR_THEME_LIGHT:
-      localStorage.setItem("theme", "light");
+      setTheme("light");
       return {
         theme: "light"
       };
