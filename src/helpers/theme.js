@@ -10,7 +10,8 @@ export const lightTheme = {
 
 export const darkTheme = {
   header: "#2A2F42",
-  chatContainer: "#2D3134",
+  chatContainer: "#131C21",
+  chatList: '#131C21',
   sideContainer: "#262D31",
   status: "#1414141",
   statusHover: "#242424",

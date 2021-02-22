@@ -7,6 +7,7 @@ import {
   ImageWrapper,
   SigninButton
 } from "./Auth.style";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
@@ -26,18 +27,23 @@ const Auth = ({
 }) => {
   AuthState(isAuthenticated, history);
   return (
-    <AuthContainer>
-      <AuthBox>
-        <ImageContainer>
-          <ImageWrapper>
-            <Image src={WhatsappIcon} />
-          </ImageWrapper>
-          <ImageText>SIGN IN TO WHATSAPP</ImageText>
-        </ImageContainer>
-        <SigninButton onClick={googleSignIn}>SIGN IN WITH GOOGLE</SigninButton>
-        <SigninButton onClick={signOutStart}>SIGN OUT </SigninButton>
-      </AuthBox>
-    </AuthContainer>
+    <>
+      {isAuthenticated && <Redirect to="/" />}
+      <AuthContainer>
+        <AuthBox>
+          <ImageContainer>
+            <ImageWrapper>
+              <Image src={WhatsappIcon} />
+            </ImageWrapper>
+            <ImageText>SIGN IN TO WHATSAPP</ImageText>
+          </ImageContainer>
+          <SigninButton onClick={googleSignIn}>
+            SIGN IN WITH GOOGLE
+          </SigninButton>
+          <SigninButton onClick={signOutStart}>SIGN OUT </SigninButton>
+        </AuthBox>
+      </AuthContainer>
+    </>
   );
 };
 

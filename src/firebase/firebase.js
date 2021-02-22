@@ -39,5 +39,5 @@ export const createUserDocument = async (userDetails) => {
   if (snapshot.exists()) {
     return;
   }
-  userRef.set(userDetails);
+  await userRef.set(userDetails);
 };

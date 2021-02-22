@@ -18,8 +18,8 @@ export function* googleSignIn() {
       email,
       photoURL
     };
-    const currentUser = createUserDocument(userDetail);
-    console.log(currentUser);
+    createUserDocument(userDetail);
+    // console.log(currentUser);
   } catch (error) {
     console.log(error);
     alert(error.message);
