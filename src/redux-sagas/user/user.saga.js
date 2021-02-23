@@ -48,6 +48,7 @@ export function* checkUserSession({ payload }) {
   try {
     yield put(userAction.signInSuccess(payload));
   } catch (error) {
+    console.log(error,error?.message)
     yield put(userAction.signInFailure());
   }
 }
