@@ -5,7 +5,8 @@ export const lightTheme = {
   status: "#EDEDED",
   statusHover: "#F5F5F5",
   search: "#F6F6F6",
-  textLight: "#636363"
+  textLight: "#636363",
+  color: '#000'
 };
 
 export const darkTheme = {
@@ -16,5 +17,6 @@ export const darkTheme = {
   status: "#1414141",
   statusHover: "#242424",
   search: "#323729",
-  textLight: "#758C8C"
+  textLight: "#758C8C",
+  color: '#fff'
 };

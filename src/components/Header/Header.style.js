@@ -7,3 +7,14 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Icon = styled.i`
+  color: ${props => props.color};
+  height: 3rem;
+  
+`;

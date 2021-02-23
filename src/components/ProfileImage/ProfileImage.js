@@ -6,7 +6,13 @@ import { ImageContainer } from "./ProfileImage.style";
 
 const ProfileImage = ({ profilePic }) => {
   console.log(profilePic);
-  return <ImageContainer src={profilePic && profilePic} alt="user-photo" />;
+  return (
+    <ImageContainer
+      src={profilePic && profilePic}
+      alt="user-photo"
+      loading="lazy"
+    />
+  );
 };
 
 ProfileImage.propTypes = {

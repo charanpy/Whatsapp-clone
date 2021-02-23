@@ -25,12 +25,8 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = async () => {
-  try {
-    const currentUser = await auth.signInWithPopup(googleProvider);
-    return currentUser;
-  } catch (e) {
-    return e;
-  }
+  const currentUser = await auth.signInWithPopup(googleProvider);
+  return currentUser;
 };
 
 export const signOut = async () => await auth.signOut();
@@ -39,13 +35,9 @@ export const createUserDocument = async (userDetails) => {
   if (!userDetails) return;
 
   const userRef = database.ref("users").child(userDetails.uid);
-  try {
-    const snapshot = await userRef.get();
-    if (snapshot.exists()) {
-      return;
-    }
-  } catch (e) {
-    return e;
+  const snapshot = await userRef.get();
+  if (snapshot.exists()) {
+    return;
   }
   await userRef.set(userDetails);
 };
