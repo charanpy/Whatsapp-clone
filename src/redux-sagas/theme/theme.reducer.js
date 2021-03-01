@@ -1,21 +1,21 @@
-import { themeActionTypes } from "./theme.type";
-import { setTheme } from "../../helpers/localstorage";
+import { themeActionTypes } from './theme.type';
+import { setTheme } from '../../helpers/localstorage';
 
 const initialState = {
-  theme: "dark"
+  theme: 'dark',
 };
 
 const themeReducer = (state = initialState, action) => {
   switch (action.type) {
     case themeActionTypes.SET_COLOR_THEME:
-      setTheme("dark");
+      setTheme('dark');
       return {
-        theme: "dark"
+        theme: 'dark',
       };
     case themeActionTypes.SET_COLOR_THEME_LIGHT:
-      setTheme("light");
+      setTheme('light');
       return {
-        theme: "light"
+        theme: 'light',
       };
     case themeActionTypes.SET_COLOR_THEME_FAILURE:
     case themeActionTypes.SET_COLOR_THEME_LIGHT_FAILURE:

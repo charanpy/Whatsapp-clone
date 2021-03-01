@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AuthContainer = styled.main`
   min-height: 100vh;
@@ -36,7 +36,7 @@ export const Image = styled.img`
 `;
 
 export const ImageText = styled.figcaption`
-  font-family: "Open Sans Condensed";
+  font-family: 'Open Sans Condensed';
   font-size: 2.3rem;
   font-weight: 600;
   margin-top: 2.5rem;
@@ -45,7 +45,7 @@ export const ImageText = styled.figcaption`
 export const SigninButton = styled.button`
   padding: 8px 8px;
   background: #25d366;
-  font-family: "Open Sans Condensed", sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.7rem;
   color: white;
   font-weight: 500;

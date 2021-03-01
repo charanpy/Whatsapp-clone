@@ -1,25 +1,19 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
-import UserTypes from "./user.type";
-import * as userAction from "./user.action";
+import { takeLatest, put, all, call } from 'redux-saga/effects';
+import UserTypes from './user.type';
+import * as userAction from './user.action';
 import {
   signInWithGoogle,
   signOut as logout,
-  createUserDocument
-} from "../../firebase/firebase";
+  createUserDocument,
+} from '../../firebase/firebase';
 
 export function* googleSignIn() {
   try {
-    const {
-      user: { uid, displayName, email, photoURL }
-    } = yield call(signInWithGoogle);
-    const userDetail = {
-      uid,
-      displayName,
-      email,
-      photoURL
-    };
-    createUserDocument(userDetail);
-    // console.log(currentUser);
+    const userDetails = yield call(signInWithGoogle);
+    console.log(userDetails, 21);
+    const res = yield call(createUserDocument, userDetails);
+    console.log(res);
+    // yield put(userAction.googleSignInSuccess())
   } catch (error) {
     console.log(error);
     alert(error.message);
@@ -60,6 +54,6 @@ export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onSignOutStart),
-    call(onCheckUserSessionStart)
+    call(onCheckUserSessionStart),
   ]);
 }

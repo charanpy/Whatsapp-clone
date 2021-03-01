@@ -1,11 +1,11 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
-import { themeActionTypes } from "./theme.type";
+import { takeLatest, put, all, call } from 'redux-saga/effects';
+import { themeActionTypes } from './theme.type';
 import {
   setTheme,
   setThemeFailure,
   setThemeLight,
-  setThemeLightFailure
-} from "./theme.action";
+  setThemeLightFailure,
+} from './theme.action';
 
 export function* setThemeDark() {
   try {

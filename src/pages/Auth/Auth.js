@@ -1,3 +1,8 @@
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
 import {
   AuthContainer,
   AuthBox,
@@ -5,30 +10,23 @@ import {
   Image,
   ImageText,
   ImageWrapper,
-  SigninButton
-} from "./Auth.style";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import {
-  googleSignInStart,
-  signOutStart
-} from "../../redux-sagas/user/user.action";
-import PropTypes from "prop-types";
-import WhatsappIcon from "../../assets/Whatsapp.png";
-import { selectIsUserAuthenticated } from "../../redux-sagas/user/user.selector";
-import AuthState from "./Auth.state";
-
+  SigninButton,
+} from './Auth.style';
+import { googleSignInStart } from '../../redux-sagas/user/user.action';
+import WhatsappIcon from '../../assets/Whatsapp.png';
+import { selectIsUserAuthenticated } from '../../redux-sagas/user/user.selector';
+import AuthState from './Auth.state';
+/* eslint-disable */
 const Auth = ({
   googleSignInStart: googleSignIn,
-  signOutStart,
   isAuthenticated,
-  history
+  history,
 }) => {
+  // eslint-disable-next-line
   AuthState(isAuthenticated, history);
   return (
     <>
-      {isAuthenticated && <Redirect to="/" />}
+      {isAuthenticated && <Redirect to='/' />}
       <AuthContainer>
         <AuthBox>
           <ImageContainer>
@@ -40,7 +38,6 @@ const Auth = ({
           <SigninButton onClick={googleSignIn}>
             SIGN IN WITH GOOGLE
           </SigninButton>
-          <SigninButton onClick={signOutStart}>SIGN OUT </SigninButton>
         </AuthBox>
       </AuthContainer>
     </>
@@ -49,18 +46,15 @@ const Auth = ({
 
 Auth.propTypes = {
   googleSignInStart: PropTypes.func.isRequired,
-  signOutStart: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  history: PropTypes.object
 };
 
 const mapStateToProps = createStructuredSelector({
-  isAuthenticated: selectIsUserAuthenticated
+  isAuthenticated: selectIsUserAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  signOutStart: () => dispatch(signOutStart())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

@@ -1,12 +1,17 @@
-import { HeaderContainer, OptionsContainer } from "./Header.style";
-import ProfileImage from "../ProfileImage/ProfileImage";
+import React from 'react';
+import { HeaderContainer, OptionsContainer, Icon, Menu } from './Header.style';
+import ProfileImage from '../ProfileImage/ProfileImage';
 
 const Header = () => {
+  console.log('Header');
   return (
     <HeaderContainer>
       <ProfileImage />
       <OptionsContainer>
-        <i className='fas fa-circle-notch'></i>
+        <Icon className='fas fa-circle-notch' />
+        <Menu>
+          <Icon className='fas fa-ellipsis-v' />
+        </Menu>
       </OptionsContainer>
     </HeaderContainer>
   );

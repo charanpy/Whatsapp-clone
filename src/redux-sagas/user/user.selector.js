@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const selectUser = (state) => state.user;
 
@@ -15,9 +15,19 @@ export const selectIsLoading = createSelector(
 export const selectProfilePhoto = createSelector(
   [selectUser],
   (user) => user.currentUser?.photoURL
-)
+);
 
 export const selectCurrentUser = createSelector(
   [selectUser],
   (user) => user.currentUser
-)
+);
+
+export const selectIsUserLoaded = createSelector(
+  [selectUser],
+  (user) => user.userLoading
+);
+
+export const selectUserId = createSelector(
+  [selectUser],
+  (user) => user.currentUser?.uid
+);

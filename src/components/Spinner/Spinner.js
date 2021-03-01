@@ -1,12 +1,11 @@
-import React from "react";
-import { SpinnerContainer, SpinnerOverlay } from "./Spinner.style";
+/*eslint-disable */
+import React from 'react';
+import SpinnerComponent from './SpinnerComponent';
 
 const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
-  console.log(isLoading);
+  console.log(isLoading, 100);
   return isLoading ? (
-    <SpinnerOverlay>
-      <SpinnerContainer />
-    </SpinnerOverlay>
+    <SpinnerComponent />
   ) : (
     <WrappedComponent {...otherProps} />
   );

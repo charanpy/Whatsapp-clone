@@ -1,14 +1,14 @@
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../redux-sagas/user/user.selector";
-import Spinner from "../../components/Spinner/Spinner";
-import Home from "../Home/Home";
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { selectIsUserLoaded } from '../../redux-sagas/user/user.selector';
+import Spinner from '../../components/Spinner/Spinner';
+import Auth from './Auth';
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: selectCurrentUser
+  isLoading: selectIsUserLoaded,
 });
 
-const AuthContainer = compose(connect(mapStateToProps), Spinner)(Home);
+const AuthContainer = compose(connect(mapStateToProps), Spinner)(Auth);
 
 export default AuthContainer;

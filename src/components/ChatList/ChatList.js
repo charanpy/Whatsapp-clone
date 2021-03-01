@@ -1,10 +1,16 @@
-import { ChatListContainer } from "./ChatList.style";
-import Header from '../../components/Header/Header';
+import React from 'react';
+import ChatListContainer from './ChatList.style';
+import Header from '../Header/Header';
+import ChatContainer from '../ChatContainer/ChatContainer';
 
 const ChatList = () => {
-  return <ChatListContainer>
-    <Header />
-  </ChatListContainer>;
+  console.log('chatList');
+  return (
+    <ChatListContainer>
+      <Header />
+      <ChatContainer />
+    </ChatListContainer>
+  );
 };
 
 export default ChatList;
