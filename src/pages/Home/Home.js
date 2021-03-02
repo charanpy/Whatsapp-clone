@@ -7,7 +7,8 @@ import { selectUserId } from '../../redux-sagas/user/user.selector';
 import { displayChatListStart } from '../../redux-sagas/channels/channels.action';
 import HomeContainer from './Home.style';
 import ChatList from '../../components/ChatList/ChatList';
-import TestPanel from '../../components/TestPanel/TestPanel';
+import ChatPanel from '../../components/ChatPanel/ChatPanel';
+
 import UseHomeState from './Home.state';
 
 const Home = ({ userId, displayChatListStart: displayChat }) => {
@@ -16,7 +17,7 @@ const Home = ({ userId, displayChatListStart: displayChat }) => {
   return (
     <HomeContainer>
       <ChatList />
-      <TestPanel />
+      <ChatPanel />
     </HomeContainer>
   );
 };
