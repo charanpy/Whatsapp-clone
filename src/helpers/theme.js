@@ -1,4 +1,5 @@
 export const lightTheme = {
+  mode: 0,
   header: '#EDEDED',
   chatContainer: '#F5F5F5',
   sideContainer: '#F8F9FA',
@@ -12,7 +13,8 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  header: '#2A2F42',
+  mode: 1,
+  header: '#2A2F32',
   chatContainer: '#131C21',
   chatList: '#131C21',
   sideContainer: '#262D31',
