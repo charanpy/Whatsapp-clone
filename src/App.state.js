@@ -22,6 +22,7 @@ const AppState = (checkUserSession, setThemeLight, theme, history, displayChat) 
           displayName,
         });
         displayChat(uid);
+
         setAppLoading(false);
       } else {
         setAppLoading(false);
