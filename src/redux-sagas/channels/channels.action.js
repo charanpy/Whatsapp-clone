@@ -64,26 +64,3 @@ export const getMessagesStart = (groupId) => ({
   type: ChannelActionTypes.GET_MESSAGES_START,
   payload: groupId,
 });
-
-export const getMessagesSuccess = (messages) => ({
-  type: ChannelActionTypes.GET_MESSAGES_START,
-  payload: messages,
-});
-
-export const getMessagesFailure = () => ({
-  type: ChannelActionTypes.GET_MESSAGES_START,
-});
-
-export const addMessageStart = (message) => ({
-  type: ChannelActionTypes.ADD_MESSAGES_START,
-  payload: message
-});
-
-export const addMessageSuccess = (message) => ({
-  type: ChannelActionTypes.ADD_MESSAGES_SUCCESS,
-  payload: message
-});
-
-export const addMessageFailure = () => ({
-  type: ChannelActionTypes.ADD_MESSAGES_START,
-});

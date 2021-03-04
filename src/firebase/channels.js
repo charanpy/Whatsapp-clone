@@ -46,14 +46,34 @@ export const createChannel = async (currentUserId, receiverId) => {
   }
 };
 
-export const getMessages = async (groupId) => {
-  try {
-    const groupRef = getRef('groups');
-    const messages = await groupRef.child(groupId).once('value');
-    if (!messages.exists()) throw new Error('Not found');
-    return messages.val();
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
+export const addMessages = async (
+  groupId,
+  currentUserId,
+  receiverId,
+  message
+) => {
+  const groupRef = getRef('groups');
+  const groupChild = groupRef.child(`${groupId}/messages`);
+  const { key } = groupChild.push();
+  const messageObject = {
+    [receiverId]: false,
+    createdBy: currentUserId,
+    message,
+    createdAt: timestamp,
+  };
+
+  const res = await groupChild.child(key).set(messageObject);
+  return res;
+};
+
+export const getMessagesFromDb = async (groupId) => {
+  const groupRef = getRef(`groups/${groupId}`);
+  const groupMsg = await groupRef.child('messages').once('value');
+  const messages = groupMsg.val();
+  console.log(messages, '1');
+  if (!messages) return null;
+  const messagesKey = Object.keys(messages).map((val) => {
+    return { ...messages[val], key: val };
+  });
+  return messagesKey;
 };

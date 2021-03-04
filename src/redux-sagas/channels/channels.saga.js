@@ -9,11 +9,9 @@ import {
   createChannelFailure,
   setCurrentChannelSuccess,
   setCurrentChannelNullSuccess,
-  getMessagesSuccess,
-  getMessagesFailure,
 } from './channels.action';
 import { getChannelsList, addedChannelsList } from '../../firebase/firebase';
-import { createChannel, getMessages } from '../../firebase/channels';
+import { createChannel } from '../../firebase/channels';
 
 export function* getChannel({ payload }) {
   try {
@@ -89,20 +87,6 @@ export function* OnSetCurrentChannelNullStart() {
   );
 }
 
-export function* getMessage({ payload }) {
-  try {
-    const messages = yield call(getMessages, payload);
-    yield put(getMessagesSuccess(messages));
-  } catch (e) {
-    console.log(e);
-    yield put(getMessagesFailure());
-  }
-}
-
-export function* onGetMessagesStart() {
-  yield takeLatest(ChannelActionTypes.GET_MESSAGES_START, getMessage);
-}
-
 export function* channelSagas() {
   yield all([
     call(OnDisplayChannelLists),
@@ -110,6 +94,5 @@ export function* channelSagas() {
     call(OnSetCurrentChannelStart),
     call(OnSetCurrentChannelNullStart),
     call(onCreateChannelStart),
-    call(onGetMessagesStart),
   ]);
 }

@@ -6,7 +6,7 @@ const initialState = {
   success: false,
   currentChannel: null,
   currentChannelLoading: false,
-  messages: [],
+  messages: null,
 };
 
 const ChannelReducer = (state = initialState, action) => {
@@ -43,7 +43,7 @@ const ChannelReducer = (state = initialState, action) => {
     case channelActionTypes.SET_CURRENT_CHANNEL_START:
     case channelActionTypes.CREATE_CHANNEL_START:
     case channelActionTypes.SET_CURRENT_CHANNEL_NULL_START:
-    case channelActionTypes.GET_MESSAGES_START:
+      // case channelActionTypes.GET_MESSAGES_START:
       return {
         ...state,
         currentChannelLoading: true,
@@ -56,7 +56,6 @@ const ChannelReducer = (state = initialState, action) => {
       };
     case channelActionTypes.SET_CURRENT_CHANNEL_NULL_SUCCESS:
     case channelActionTypes.CREATE_CHANNEL_FAILURE:
-    case channelActionTypes.GET_MESSAGES_FAILURE:
       return {
         ...state,
         currentChannel: null,
@@ -70,17 +69,6 @@ const ChannelReducer = (state = initialState, action) => {
           ...state.currentChannel,
           groupId: action.payload,
         },
-      };
-    case channelActionTypes.GET_MESSAGES_SUCCESS:
-      return {
-        ...state,
-        currentChannelLoading: false,
-        messages: action.payload,
-      };
-    case channelActionTypes.ADD_MESSAGES_SUCCESS:
-      return {
-        ...state,
-        messages: [...state.messages, action.payload],
       };
     default:
       return state;

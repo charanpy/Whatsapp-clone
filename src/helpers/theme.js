@@ -10,6 +10,8 @@ export const lightTheme = {
   color: '#000',
   Icon: '#000',
   border: '#999',
+  currentUserChat: '#DCF8C6',
+  receiverChat: '#fff',
 };
 
 export const darkTheme = {
@@ -25,4 +27,6 @@ export const darkTheme = {
   color: '#fff',
   Icon: '#B1B3B5',
   border: '#2D3134',
+  currentUserChat: '#056162',
+  receiverChat: '#262D31',
 };
