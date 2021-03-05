@@ -55,7 +55,7 @@ export function* OnCreateChannel({ payload }) {
     const groupId = yield call(createChannel, currentUserId, receiverId);
     yield put(createChannelSuccess(groupId));
   } catch (e) {
-    console.log(e);
+    console.log(e, 'oo');
     yield put(createChannelFailure());
   }
 }

@@ -7,9 +7,7 @@ export const Footer = styled.footer`
   padding: 1.6rem 1.6rem;
   background: ${(props) => props.theme.header};
   width: calc(100% - 3.2rem);
-  position: absolute;
-  left: 0;
-  bottom: 0;
+  margin-top: auto;
   z-index: 100;
 `;
 

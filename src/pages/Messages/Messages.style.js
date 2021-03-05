@@ -3,7 +3,6 @@ import chatLight from '../../assets/chat-light.png';
 import chatDark from '../../assets/chat-dark.png';
 /* eslint-disable*/
 const MessageContainer = styled.section`
-  display: flex;
   min-height: 100%;
   width: 70%;
   background: url(${(props) => (props.theme.mode ? chatDark : chatLight)});

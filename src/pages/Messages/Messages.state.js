@@ -12,29 +12,38 @@ const MessageState = (
   useEffect(() => {
     if (!groupId) {
       createChannel(currentUserId, uid);
-    }
-  }, [createChannel, groupId, uid, currentUserId]);
-
-  useEffect(() => {
-    if (groupId) {
+    } else {
       getMessages(groupId);
     }
-  }, [groupId, getMessages]);
+  }, [createChannel, groupId, uid, currentUserId, getMessages]);
+
+  // useEffect(() => {
+  //   if (groupId) {
+  //     getMessages(groupId);
+  //   }
+  // }, [groupId, getMessages]);
 
   useEffect(() => {
     const groupRef = getRef('groups');
-    const listen = groupRef
-      .child(`${groupId}/messages`)
-      .orderByChild('createdAt')
-      .startAt(Date.now())
-      .on('child_added', (snap) => {
-        console.log(snap.val(), 'ooo');
-        if (snap.val()) {
-          console.log('saga');
-          getRealtime(snap.val());
-        }
-      });
-    return () => groupRef.child(channel.groupId).off('child_added', listen);
+    console.log('err');
+    let listen;
+    if (groupId) {
+      listen = groupRef
+        .child(`${groupId}/messages`)
+        .orderByChild('createdAt')
+        .startAt(Date.now())
+        .on('child_added', (snap) => {
+          console.log(snap.val(), 'ooo');
+          if (snap.val()) {
+            console.log('saga');
+            getRealtime(snap.val());
+          }
+        });
+    }
+    return () =>
+      // eslint-disable-next-line
+      groupId &&
+      groupRef.child(`${groupId}/messages`).off('child_added', listen);
   }, [channel, groupId, getRealtime]);
 };
 

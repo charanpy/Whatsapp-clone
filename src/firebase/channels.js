@@ -13,12 +13,13 @@ export const checkChannelExist = async (
 };
 
 export const createChannel = async (currentUserId, receiverId) => {
-  const groupRef = getRef('groups');
-  const currentUserChannel = getRef(`channels/${currentUserId}`);
-  const receiverChannel = getRef(`channels/${receiverId}`);
-
-  const { key } = groupRef.push();
   try {
+    const groupRef = getRef('groups');
+    console.log('fu');
+    const currentUserChannel = getRef(`/channels/${currentUserId}`);
+    const receiverChannel = getRef(`/channels/${receiverId}`);
+
+    const { key } = groupRef.push();
     await groupRef.child(key).set({
       type: 'private',
       createdBy: currentUserId,
@@ -41,7 +42,7 @@ export const createChannel = async (currentUserId, receiverId) => {
     });
     return key;
   } catch (e) {
-    console.log(e);
+    console.log(e, 'oops');
     return false;
   }
 };
@@ -59,6 +60,7 @@ export const addMessages = async (
     [receiverId]: false,
     createdBy: currentUserId,
     message,
+    key,
     createdAt: timestamp,
   };
 
