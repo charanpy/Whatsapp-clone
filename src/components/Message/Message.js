@@ -1,26 +1,31 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectMessage } from '../../redux-sagas/message/message.selector';
+import { generateUniqueUid as id } from '../../helpers/helpers';
 import { ChannelPropTypes } from '../../helpers/PropTypeValues';
+import { selectMessage } from '../../redux-sagas/message/message.selector';
 import UseMsgState from './Message.state';
-import MessageList from './MessageList';
 import { ChatContainer } from './Message.style';
-
+import MessageList from './MessageList';
 /* eslint-disable */
+
 const Message = ({ channel, currentUserId, messages }) => {
-  UseMsgState(channel, currentUserId);
+  const messagesArray = Object.values(messages);
+  const [messagesEndRef] = UseMsgState(channel, currentUserId, messagesArray);
   return (
     <ChatContainer>
       {messages &&
-        messages.map((val) => (
-          <MessageList
-            message={val.message}
-            position={val.createdBy === currentUserId}
-            timestamp={val.createdAt}
-            key={val.message}
-          />
+        messagesArray.map((val) => (
+          <div key={val.key + id()}>
+            <MessageList
+              message={val.message}
+              position={val.createdBy === currentUserId}
+              timestamp={val.createdAt}
+              seen={val.createdBy === currentUserId ? val.seen : null}
+            />
+            <div ref={messagesEndRef} />
+          </div>
         ))}
     </ChatContainer>
   );

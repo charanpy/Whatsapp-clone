@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createChannelStart } from '../../redux-sagas/channels/channels.action';
-import { getMessagesStart, getRealtimeMessagesStart } from '../../redux-sagas/message/message.action';
+import { getMessagesStart, getRealtimeMessagesStart, setSeenStart } from '../../redux-sagas/message/message.action';
 import { ChannelPropTypes } from '../../helpers/PropTypeValues';
 import UseMessageState from './Messages.state';
 import Header from '../../components/shared/Header/Header';
@@ -15,10 +15,11 @@ const Messages = ({
   currentUserId,
   createChannelStart: createChannel,
   getMessagesStart: getMessages,
-  getRealtimeMessagesStart: getRealtimeMsg
+  getRealtimeMessagesStart: getRealtimeMsg,
+  setSeenStart: setSeen
 }) => {
   console.log('Message', channel, currentUserId);
-  UseMessageState(channel, currentUserId, createChannel, getMessages, getRealtimeMsg);
+  UseMessageState(channel, currentUserId, createChannel, getMessages, getRealtimeMsg, setSeen);
   return (
     <MessageContainer>
       <Header
@@ -41,6 +42,7 @@ Messages.propTypes = {
   createChannelStart: PropTypes.func.isRequired,
   getMessagesStart: PropTypes.func.isRequired,
   getRealtimeMessagesStart: PropTypes.func.isRequired,
+  setSeenStart: PropTypes.func.isRequired,
 };
 
 Messages.defaultProps = {
@@ -52,6 +54,7 @@ const mapDispatchToProps = (dispatch) => ({
     // eslint-disable-next-line
     dispatch(createChannelStart(currentUserId, receiverId)),
   getMessagesStart: (id) => dispatch(getMessagesStart(id)),
-  getRealtimeMessagesStart: (chat) => dispatch(getRealtimeMessagesStart(chat))
+  getRealtimeMessagesStart: (chat) => dispatch(getRealtimeMessagesStart(chat)),
+  setSeenStart: (id) => dispatch(setSeenStart(id))
 });
 export default connect(null, mapDispatchToProps)(Messages);

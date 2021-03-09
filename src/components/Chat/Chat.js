@@ -6,10 +6,10 @@ import {
   ChatContainer,
   ChatDetail,
   ChatName,
-  Notification,
   ImageContainer,
 } from './Chat.style';
 import ProfileImage from '../shared/ProfileImage/ProfileImage';
+import Notification from '../Notification/Notification';
 
 const Chat = ({
   displayName,
@@ -32,7 +32,7 @@ const Chat = ({
         </ImageContainer>
         <ChatDetail>
           <ChatName>{displayName}</ChatName>
-          <Notification>Hi</Notification>
+          <Notification groupId={groupId} />
         </ChatDetail>
       </ChatContainer>
     </>

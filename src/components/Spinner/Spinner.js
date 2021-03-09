@@ -1,14 +1,10 @@
 /*eslint-disable */
 import React from 'react';
-import SpinnerComponent from './SpinnerComponent';
+import SpinnerOverlay from './SpinnerOverlay';
 
 const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
   console.log(isLoading, 100);
-  return isLoading ? (
-    <SpinnerComponent />
-  ) : (
-    <WrappedComponent {...otherProps} />
-  );
+  return isLoading ? <SpinnerOverlay /> : <WrappedComponent {...otherProps} />;
 };
 
 export default WithSpinner;

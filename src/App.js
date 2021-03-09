@@ -12,7 +12,7 @@ import { selectBackground } from './redux-sagas/theme/theme.selector';
 import AppRoute from './Route/Route';
 import UseAppState from './App.state';
 import './styles.css';
-import Spinner from './components/Spinner/SpinnerComponent';
+import Spinner from './components/Spinner/SpinnerOverlay';
 
 const App = ({
   checkUserSession: userSession,

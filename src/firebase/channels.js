@@ -57,11 +57,12 @@ export const addMessages = async (
   const groupChild = groupRef.child(`${groupId}/messages`);
   const { key } = groupChild.push();
   const messageObject = {
-    [receiverId]: false,
+    seen: false,
     createdBy: currentUserId,
     message,
     key,
     createdAt: timestamp,
+    receiver: `${receiverId}false`,
   };
 
   const res = await groupChild.child(key).set(messageObject);
@@ -78,4 +79,34 @@ export const getMessagesFromDb = async (groupId) => {
     return { ...messages[val], key: val };
   });
   return messagesKey;
+};
+
+export const setSeen = (channel, currentUserId) => {
+  const channelRef = getRef(`groups/${channel.groupId}`);
+  channelRef
+    .child('messages')
+    .orderByChild('receiver')
+    .equalTo(`${currentUserId}false`)
+    .once('value', (snapshot) => {
+      console.log(snapshot.val(), 'fu');
+
+      if (snapshot.val()) {
+        snapshot.forEach((child) => {
+          child.ref.update({
+            seen: true,
+            receiver: `${currentUserId}true`,
+          });
+        });
+      }
+    });
+};
+
+export const getNotifications = async (groupId, currentUserId) => {
+  const groupRef = getRef(`groups/${groupId}`);
+  const notification = await groupRef
+    .child('messages')
+    .orderByChild('receiver')
+    .equalTo(`${currentUserId}false`)
+    .once('value');
+  return notification.val();
 };

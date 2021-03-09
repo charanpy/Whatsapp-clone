@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Picker } from 'emoji-mart';
-import 'emoji-mart/css/emoji-mart.css';
 import { addMessageStart } from '../../redux-sagas/message/message.action';
 import { ChannelPropTypes } from '../../helpers/PropTypeValues';
 import { Footer, SendMessage } from './MessageInput.style';
 import Icon from '../shared/Icon/Icon';
 import Input from '../shared/Input/Input';
 import UseMessageInputState from './MessageInput.state';
+import UseEditorState from '../shared/ImageEditor/Image.state';
+import ImageEditor from '../shared/ImageEditor/ImageEditor';
 
 const MessageInput = ({
   channel,
@@ -16,28 +16,43 @@ const MessageInput = ({
   addMessageStart: addMessage,
 }) => {
   const [
+    visible,
+    file,
+    OnMountModal,
+    OnUnMountModal,
+    editor,
+    setImage,
+    loading,
+    croppedImage,
+    setLoading,
+    blob,
+  ] = UseEditorState();
+  const [
     message,
     submitHandler,
-    emojiToggle,
-    handleEmojiToggle,
-  ] = UseMessageInputState(channel, currentUserId, addMessage);
-  console.log(message);
+    handleFileChange,
+    handleCroppedImage,
+    sendImageFile,
+  ] = UseMessageInputState(
+    channel,
+    currentUserId,
+    addMessage,
+    OnMountModal,
+    editor,
+    setImage,
+    setLoading,
+    blob,
+    OnUnMountModal
+  );
+  console.log('MessageInput');
   return (
     <Footer>
-      {emojiToggle && (
-        <Picker
-          set='apple'
-          className='emojipicker'
-          title='Pick emoji'
-          emoji='point_up'
-        />
-      )}
-      <Icon as='button' className='far fa-laugh' onClick={handleEmojiToggle} />
+      <Icon as='button' className='far fa-laugh' />
       {/* eslint-disable-next-line */}
       <label htmlFor='send_file'>
         <Icon className='fas fa-paperclip' />
       </label>
-      <input id='send_file' type='file' />
+      <input id='send_file' type='file' onChange={handleFileChange} />
       <Input
         name='message'
         placeholder='Type a message'
@@ -47,6 +62,17 @@ const MessageInput = ({
       <SendMessage onClick={submitHandler}>
         <Icon className='fas fa-paper-plane' />
       </SendMessage>
+      <ImageEditor
+        visible={visible}
+        closeModal={OnUnMountModal}
+        image={file}
+        content='SEND'
+        editorRef={editor}
+        handleCrop={handleCroppedImage}
+        loading={loading}
+        croppedImage={croppedImage}
+        sendImage={sendImageFile}
+      />
     </Footer>
   );
 };
@@ -67,4 +93,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addMessageStart({ groupId, currentUserId, receiverId, message })),
 });
 
-export default connect(null, mapDispatchToProps)(MessageInput);
+export default React.memo(connect(null, mapDispatchToProps)(MessageInput));

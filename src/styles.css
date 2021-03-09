@@ -21,5 +21,31 @@ i{
 .emojipicker{
   position: absolute;
 }
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(-10px)
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity, transform 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  display: flex;
+}
+
+.fade-exit-active {
+  opacity: 0;
+
+
+
+  transition: opacity 500ms;
+
+}
+
 /* 
 Segoe UI,Helvetica Neue,Helvetica,Lucida Grande,Arial,Ubuntu,Cantarell,Fira Sans,sans-serif */

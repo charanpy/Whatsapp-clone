@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SpinnerOverlay = styled.div`
-  height: 100vh;
-  width: 100%;
+  height: 100vh !important;
+  width: 100% !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ export const SpinnerContainer = styled.div`
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
-  -webkit-animation: spin 5s ease-in-out infinite;
+  -webkit-animation: spin 3s ease-in-out infinite;
   @keyframes spin {
     to {
       -webkit-transform: rotate(360deg);

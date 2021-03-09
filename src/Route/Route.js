@@ -6,11 +6,13 @@ import PrivateRoute from './PrivateRoute';
 import Messages from '../pages/Messages/Messages.container';
 
 const AppRoute = () => (
-  <Switch>
-    <PrivateRoute exact path='/' component={Home} />
-    <Route exact path='/signin' component={Auth} />
-    <PrivateRoute path='/message/:userId/:groupId' component={Messages} />
-  </Switch>
+  <>
+    <Switch>
+      <PrivateRoute exact path='/' component={Home} />
+      <Route exact path='/signin' component={Auth} />
+      <PrivateRoute path='/message/:userId/:groupId' component={Messages} />
+    </Switch>
+  </>
 );
 
 export default AppRoute;

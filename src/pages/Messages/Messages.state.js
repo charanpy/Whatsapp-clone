@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { getRef } from '../../firebase/firebase';
+import { setSeen as updateSeen } from '../../firebase/channels';
 
 const MessageState = (
   channel,
   currentUserId,
   createChannel,
   getMessages,
-  getRealtime
+  getRealtime,
+  setSeen
 ) => {
   const { groupId, uid } = channel;
   useEffect(() => {
@@ -16,12 +18,6 @@ const MessageState = (
       getMessages(groupId);
     }
   }, [createChannel, groupId, uid, currentUserId, getMessages]);
-
-  // useEffect(() => {
-  //   if (groupId) {
-  //     getMessages(groupId);
-  //   }
-  // }, [groupId, getMessages]);
 
   useEffect(() => {
     const groupRef = getRef('groups');
@@ -33,10 +29,11 @@ const MessageState = (
         .orderByChild('createdAt')
         .startAt(Date.now())
         .on('child_added', (snap) => {
-          console.log(snap.val(), 'ooo');
           if (snap.val()) {
-            console.log('saga');
-            getRealtime(snap.val());
+            getRealtime({
+              [snap.key]: snap.val(),
+            });
+            updateSeen(channel, currentUserId);
           }
         });
     }
@@ -44,7 +41,25 @@ const MessageState = (
       // eslint-disable-next-line
       groupId &&
       groupRef.child(`${groupId}/messages`).off('child_added', listen);
-  }, [channel, groupId, getRealtime]);
+  }, [channel, groupId, getRealtime, currentUserId]);
+
+  useEffect(() => {
+    const groupRef = getRef(`groups/${groupId}/messages`);
+    console.log('err');
+    let listen;
+    if (groupId) {
+      listen = groupRef.orderByChild('seen').on('child_changed', (snap) => {
+        console.log(snap.val(), 'ooops');
+        if (snap.val()?.seen) {
+          setSeen(snap.val().key);
+        }
+      });
+    }
+    return () =>
+      // eslint-disable-next-line
+      groupId &&
+      groupRef.child(`${groupId}/messages`).off('child_changed', listen);
+  }, [channel, groupId, getRealtime, setSeen]);
 };
 
 export default MessageState;

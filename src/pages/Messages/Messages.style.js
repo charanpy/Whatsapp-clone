@@ -10,7 +10,7 @@ const MessageContainer = styled.section`
   flex-direction: column;
   border-left: ${(props) =>
     props.theme.mode ? '1px solid #EDEDED' : '1px solid #2A2F32'};
-  position: relative;
+  /* position: relative; */
   background-position: center;
   background-size: contain;
 `;

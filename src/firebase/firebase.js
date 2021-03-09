@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBFrlXLPxef9rkJC7asLnlVmtFp_cWxWBw',
@@ -17,6 +18,7 @@ if (!firebase.apps.length) {
 }
 
 export const auth = firebase.auth();
+export const storage = firebase.storage();
 export const database = firebase.database();
 export const check = () => console.log(auth.currentUser);
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
