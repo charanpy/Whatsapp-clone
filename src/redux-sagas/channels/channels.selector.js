@@ -26,3 +26,8 @@ export const selectCurrentChannelId = createSelector(
   [selectChannels],
   (channel) => channel.currentChannel.uid
 );
+
+export const selectCurrentChannelGroupId = createSelector(
+  [selectChannels],
+  (channel) => channel.currentChannel?.groupId
+);

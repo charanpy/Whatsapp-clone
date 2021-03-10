@@ -11,7 +11,7 @@ import MessageList from './MessageList';
 /* eslint-disable */
 
 const Message = ({ channel, currentUserId, messages }) => {
-  const messagesArray = Object.values(messages);
+  const messagesArray = messages ? Object.values(messages) : [];
   const [messagesEndRef] = UseMsgState(channel, currentUserId, messagesArray);
   return (
     <ChatContainer>

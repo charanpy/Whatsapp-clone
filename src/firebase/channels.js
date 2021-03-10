@@ -103,10 +103,12 @@ export const setSeen = (channel, currentUserId) => {
 
 export const getNotifications = async (groupId, currentUserId) => {
   const groupRef = getRef(`groups/${groupId}`);
-  const notification = await groupRef
+  const fetchNotification = await groupRef
     .child('messages')
     .orderByChild('receiver')
     .equalTo(`${currentUserId}false`)
     .once('value');
-  return notification.val();
+  const notifications = fetchNotification.val();
+  console.log(notifications, 333);
+  return notifications ? Object.values(notifications) : [];
 };

@@ -36,6 +36,20 @@ export const ChatName = styled.span`
 
 export const Notification = styled.span`
   font-size: 1.3rem;
-  color: ${(props) => props.theme.textLight};
+  color: #25d366;
   font-family: sans-serif;
+`;
+
+export const Unseen = styled.div`
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background: #25d366;
+  /* padding: 1rem; */
+  margin-left: 0.8rem;
+  color: white;
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `;

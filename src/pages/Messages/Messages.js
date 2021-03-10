@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createChannelStart } from '../../redux-sagas/channels/channels.action';
-import { getMessagesStart, getRealtimeMessagesStart, setSeenStart } from '../../redux-sagas/message/message.action';
+import { getMessagesStart, getRealtimeMessagesStart, setSeenStart, deleteNotificationStart } from '../../redux-sagas/message/message.action';
 import { ChannelPropTypes } from '../../helpers/PropTypeValues';
 import UseMessageState from './Messages.state';
 import Header from '../../components/shared/Header/Header';
@@ -16,10 +16,13 @@ const Messages = ({
   createChannelStart: createChannel,
   getMessagesStart: getMessages,
   getRealtimeMessagesStart: getRealtimeMsg,
-  setSeenStart: setSeen
+  setSeenStart: setSeen,
+  deleteNotificationStart: deleteNotification
 }) => {
   console.log('Message', channel, currentUserId);
-  UseMessageState(channel, currentUserId, createChannel, getMessages, getRealtimeMsg, setSeen);
+  UseMessageState(
+    channel, currentUserId, createChannel, getMessages, getRealtimeMsg, setSeen, deleteNotification
+  );
   return (
     <MessageContainer>
       <Header
@@ -43,6 +46,7 @@ Messages.propTypes = {
   getMessagesStart: PropTypes.func.isRequired,
   getRealtimeMessagesStart: PropTypes.func.isRequired,
   setSeenStart: PropTypes.func.isRequired,
+  deleteNotificationStart: PropTypes.func.isRequired,
 };
 
 Messages.defaultProps = {
@@ -55,6 +59,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(createChannelStart(currentUserId, receiverId)),
   getMessagesStart: (id) => dispatch(getMessagesStart(id)),
   getRealtimeMessagesStart: (chat) => dispatch(getRealtimeMessagesStart(chat)),
-  setSeenStart: (id) => dispatch(setSeenStart(id))
+  setSeenStart: (id) => dispatch(setSeenStart(id)),
+  deleteNotificationStart: (groupId) => dispatch(deleteNotificationStart(groupId))
 });
 export default connect(null, mapDispatchToProps)(Messages);

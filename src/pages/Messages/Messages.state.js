@@ -8,7 +8,8 @@ const MessageState = (
   createChannel,
   getMessages,
   getRealtime,
-  setSeen
+  setSeen,
+  deleteNotification
 ) => {
   const { groupId, uid } = channel;
   useEffect(() => {
@@ -16,8 +17,16 @@ const MessageState = (
       createChannel(currentUserId, uid);
     } else {
       getMessages(groupId);
+      deleteNotification(groupId);
     }
-  }, [createChannel, groupId, uid, currentUserId, getMessages]);
+  }, [
+    createChannel,
+    groupId,
+    uid,
+    currentUserId,
+    getMessages,
+    deleteNotification,
+  ]);
 
   useEffect(() => {
     const groupRef = getRef('groups');
