@@ -11,8 +11,17 @@ import ProfileImage from '../ProfileImage/ProfileImage';
 import IconContainer from '../Icon/Icon';
 import { ChatName } from '../../Chat/Chat.style';
 import ActiveUser from '../../ActiveUser/ActiveUser';
+import Navigate from '../Navigate/Navigate';
 
-const Header = ({ icon1, icon2, text, label, chatProfile, position }) => {
+const Header = ({
+  icon1,
+  icon2,
+  text,
+  label,
+  chatProfile,
+  position,
+  onClick,
+}) => {
   console.log('Header');
   return (
     <HeaderContainer position={position}>
@@ -26,9 +35,9 @@ const Header = ({ icon1, icon2, text, label, chatProfile, position }) => {
         )}
       </ImageContainer>
       <OptionsContainer>
-        <IconContainer className={icon1} />
-        <Menu>
-          <IconContainer className={icon2} />
+        <Navigate navigateTo='/edit' iconName={icon1} />
+        <Menu as='button' onClick={onClick}>
+          <IconContainer as='button' className={icon2} />
         </Menu>
       </OptionsContainer>
     </HeaderContainer>
@@ -36,18 +45,22 @@ const Header = ({ icon1, icon2, text, label, chatProfile, position }) => {
 };
 
 Header.propTypes = {
-  icon1: PropTypes.string.isRequired,
-  icon2: PropTypes.string.isRequired,
+  icon1: PropTypes.string,
+  icon2: PropTypes.string,
   text: PropTypes.bool,
   label: PropTypes.string,
   chatProfile: PropTypes.string,
   position: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 Header.defaultProps = {
   text: false,
   label: null,
   chatProfile: null,
+  icon1: 'none',
+  icon2: 'none',
+  onClick: () => {},
 };
 
 export default React.memo(Header);

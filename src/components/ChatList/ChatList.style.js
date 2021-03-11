@@ -7,6 +7,10 @@ const ChatListContainer = styled.section`
   min-height: 100vh;
   flex-direction: column;
   position: relative;
+
+  @media (max-width: 650px) {
+    width: 100vw;
+  }
 `;
 
 export default ChatListContainer;

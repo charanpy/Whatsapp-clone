@@ -7,6 +7,10 @@ const TestPanelContainer = styled.section`
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme.sideContainer};
+
+  @media(max-width: 650px){
+    display: none;
+  }
 `;
 
 export default TestPanelContainer;

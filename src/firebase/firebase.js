@@ -4,13 +4,13 @@ import 'firebase/database';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBFrlXLPxef9rkJC7asLnlVmtFp_cWxWBw',
-  authDomain: 'w-clone-f3cce.firebaseapp.com',
-  projectId: 'w-clone-f3cce',
-  storageBucket: 'w-clone-f3cce.appspot.com',
-  messagingSenderId: '744813491643',
-  appId: '1:744813491643:web:adbbc3511c17293e6b409e',
-  measurementId: 'G-E39XNRJFX0',
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
 if (!firebase.apps.length) {
@@ -64,6 +64,11 @@ export const signOut = async () => {
   }
 };
 
+export const getUser = async (userPayload) => {
+  const userRef = getRef('users');
+  const user = await userRef.child(userPayload.uid).once('value');
+  return user.val();
+};
 export const createUserDocument = async (userDetails) => {
   // console.log('func', userDetails);
   if (!userDetails?.uid) return {};

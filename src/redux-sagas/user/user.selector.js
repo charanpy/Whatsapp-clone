@@ -22,6 +22,11 @@ export const selectCurrentUser = createSelector(
   (user) => user.currentUser
 );
 
+export const selectUsername = createSelector(
+  [selectUser],
+  (user) => user.currentUser?.displayName
+);
+
 export const selectIsUserLoaded = createSelector(
   [selectUser],
   (user) => user.userLoading

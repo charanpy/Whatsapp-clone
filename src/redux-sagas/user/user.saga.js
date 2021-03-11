@@ -5,6 +5,7 @@ import {
   signInWithGoogle,
   signOut as logout,
   createUserDocument,
+  getUser,
 } from '../../firebase/firebase';
 
 export function* googleSignIn() {
@@ -16,6 +17,7 @@ export function* googleSignIn() {
     // yield put(userAction.googleSignInSuccess())
   } catch (error) {
     console.log(error);
+    // eslint-disable-next-line
     alert(error.message);
     yield put(userAction.googleSignInFailure());
   }
@@ -40,7 +42,8 @@ export function* onSignOutStart() {
 
 export function* checkUserSession({ payload }) {
   try {
-    yield put(userAction.signInSuccess(payload));
+    const user = yield call(getUser, payload);
+    yield put(userAction.signInSuccess(user || payload));
   } catch (error) {
     yield put(userAction.signInFailure());
   }
@@ -50,10 +53,20 @@ export function* onCheckUserSessionStart() {
   yield takeLatest(UserTypes.CHECK_USER_SESSION, checkUserSession);
 }
 
+export function* changeProfile({ payload }) {
+  const { name, value } = payload;
+  yield put(userAction.changeProfileSuccess({ name, value }));
+}
+
+export function* onChangeProfileStart() {
+  yield takeLatest(UserTypes.CHANGE_PROFILE_START, changeProfile);
+}
+
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onSignOutStart),
     call(onCheckUserSessionStart),
+    call(onChangeProfileStart),
   ]);
 }

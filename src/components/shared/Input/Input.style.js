@@ -16,7 +16,7 @@ export const Input = styled.input`
   background: ${(props) => props.theme.search};
   outline: none;
   border: none;
-  padding-left: ${(props) => (props.icon ? 7 : 2)}rem;
+  padding-left: ${(props) => (props.icon ? 6.5 : 2)}rem;
   color: ${(props) => props.theme.textLight};
 
   &::placeholder {

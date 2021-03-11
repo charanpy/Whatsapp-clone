@@ -14,7 +14,7 @@ i{
   cursor: pointer;
 }
 
-#send_file{
+#send_file,#send,.none,#theme-light,#theme-dark{
   display: none;
 }
 
@@ -24,25 +24,19 @@ i{
 
 .fade-enter {
   opacity: 0;
-  transform: translateY(-10px)
 }
 
 .fade-enter-active {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity, transform 500ms;
+  transition: opacity 500ms;
 }
 
 .fade-exit {
   opacity: 1;
-  display: flex;
 }
 
 .fade-exit-active {
   opacity: 0;
-
-
-
   transition: opacity 500ms;
 
 }

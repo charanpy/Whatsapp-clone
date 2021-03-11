@@ -46,6 +46,14 @@ const UserReducer = (state = initialState, action) => {
         loading: false,
         userLoading: false,
       };
+    case userTypes.CHANGE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          [action.payload.name]: action.payload.value,
+        },
+      };
     default:
       return state;
   }

@@ -13,6 +13,26 @@ const MessageContainer = styled.section`
   /* position: relative; */
   background-position: center;
   background-size: contain;
+  opacity: 1;
+  transition: all 500ms linear;
+
+  @media (max-width: 650px) {
+    ${({ channel }) =>
+      channel
+        ? `
+      position: absolute;
+      width: 100vw;
+      opacity: 1;
+  transition: all 500ms linear;
+
+    `
+        : `
+  transition: all 500ms linear;
+
+    opacity: 0;
+      display: none;
+    `}
+  }
 `;
 
 export default MessageContainer;

@@ -22,5 +22,6 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'jsx-quotes': [2, 'prefer-single'],
     'object-curly-newline': 'off',
+    'no-alert': 'off',
   },
 };

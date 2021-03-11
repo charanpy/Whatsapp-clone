@@ -34,3 +34,13 @@ export const checkUserSession = (user) => ({
   type: UserTypes.CHECK_USER_SESSION,
   payload: user,
 });
+
+export const changeProfileStart = (user) => ({
+  type: UserTypes.CHANGE_PROFILE_START,
+  payload: user,
+});
+
+export const changeProfileSuccess = (user) => ({
+  type: UserTypes.CHANGE_PROFILE_SUCCESS,
+  payload: user,
+});

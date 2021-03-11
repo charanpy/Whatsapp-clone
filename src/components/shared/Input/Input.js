@@ -13,20 +13,4 @@ const InputContainer = (props, ref) => {
   );
 };
 
-// InputContainer.propTypes = {
-//   onHandleChange: PropTypes.func.isRequired,
-//   value: PropTypes.string,
-//   placeholder: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   icon: PropTypes.bool,
-//   width: PropTypes.number,
-//   handleKeyPress: PropTypes.func,
-// };
-
-// InputContainer.defaultProps = {
-//   icon: false,
-//   width: 100,
-//   handleKeyPress: null,
-// };
-
 export default React.forwardRef(InputContainer);
