@@ -64,3 +64,7 @@ export const getMessagesStart = (groupId) => ({
   type: ChannelActionTypes.GET_MESSAGES_START,
   payload: groupId,
 });
+
+export const unsubscribeChannel = () => ({
+  type: ChannelActionTypes.UNSUBSCRIBE_CHANNEL,
+});

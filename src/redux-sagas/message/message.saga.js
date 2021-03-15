@@ -1,4 +1,12 @@
-import { takeLatest, all, call, put, takeEvery } from 'redux-saga/effects';
+import {
+  takeLatest,
+  all,
+  call,
+  put,
+  takeEvery,
+  take,
+  cancel,
+} from 'redux-saga/effects';
 import MessageActionTypes from './message.type';
 import {
   getMessagesSuccess,
@@ -21,9 +29,7 @@ import {
 
 export function* getMessage({ payload }) {
   try {
-    yield console.log(2, payload);
     const msg = yield call(getMessagesFromDb, payload);
-    yield console.log(msg);
     yield put(getMessagesSuccess(msg));
   } catch (e) {
     console.log(e);
@@ -38,7 +44,6 @@ export function* onGetMessagesStart() {
 export function* addMessage({ payload }) {
   try {
     const { groupId, currentUserId, receiverId, message } = payload;
-    console.log(groupId, currentUserId, receiverId, message, payload);
     const res = yield call(
       getMsgDb,
       groupId,
@@ -46,7 +51,6 @@ export function* addMessage({ payload }) {
       receiverId,
       message
     );
-    console.log(res);
     yield put(addMessageSuccess());
   } catch (e) {
     console.log(e);
@@ -79,6 +83,10 @@ export function* OnSetMsgSeen() {
   yield takeLatest(MessageActionTypes.SET_MSG_SEEN_START, setMsgSeen);
 }
 
+export function* unsubscribe(task) {
+  yield cancel(task);
+}
+
 export function* fetchNotification({ payload }) {
   try {
     const { groupId, currentUserId } = payload;
@@ -91,12 +99,16 @@ export function* fetchNotification({ payload }) {
 }
 
 export function* OnFetchNotificationStart() {
-  yield takeEvery(MessageActionTypes.GET_NOTIFICATION_START, fetchNotification);
+  const notification = yield takeEvery(
+    MessageActionTypes.GET_NOTIFICATION_START,
+    fetchNotification
+  );
+  yield take(MessageActionTypes.UNSUBSCRIBE_NOTIFICATION);
+  yield call(unsubscribe, notification);
 }
 
 export function* addNotification({ payload }) {
   const { groupId, message } = payload;
-  console.log(groupId, message);
   yield put(getRealtimeNotificationSuccess({ groupId, message }));
 }
 

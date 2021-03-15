@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import Modal from '../Modal/Modal';
+import ImageView from '../ImageView/ImageView';
+import { ModalContext as ModalProvider } from '../context/Modal';
 import { selectProfilePhoto } from '../../../redux-sagas/user/user.selector';
-import { ImageContainer } from './ProfileImage.style';
+import { ImageContainer, Button } from './ProfileImage.style';
 
 const ProfileImage = ({ profilePic, chatProfile = null, height = 4 }) => {
+  const { visible, setModalVisible } = useContext(ModalProvider);
   return (
-    <ImageContainer
-      src={chatProfile || profilePic}
-      alt='user-photo'
-      loading='lazy'
-      height={height}
-    />
+    <>
+      <Button onClick={setModalVisible}>
+        <ImageContainer
+          src={chatProfile || profilePic}
+          alt='user-photo'
+          loading='lazy'
+          height={height}
+        />
+      </Button>
+      <Modal visible={visible}>
+        <ImageView action={setModalVisible} src={chatProfile || profilePic} />
+      </Modal>
+    </>
   );
 };
 

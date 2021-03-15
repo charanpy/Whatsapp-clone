@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { selectIsUserAuthenticated } from '../redux-sagas/user/user.selector';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-  console.log(isAuthenticated, 'auth');
   return (
     <Route
       {...rest}

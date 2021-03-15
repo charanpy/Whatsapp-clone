@@ -5,7 +5,6 @@ export const getAllMessages = (message) => {
       [value.key]: value,
     };
   }, {});
-  console.log(messages);
   return messages;
 };
 

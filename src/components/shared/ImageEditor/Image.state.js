@@ -11,14 +11,12 @@ const ImageEditorState = () => {
   const editor = useRef();
   const { visible, file, loading, croppedImage, blob } = modal;
   const onMountModal = (isVisible, photo) => {
-    console.log(isVisible, 'aaa');
     setModal({
       ...modal,
       visible: isVisible,
       file: photo,
     });
   };
-  console.log(modal);
 
   const OnUnMountModal = () => {
     setModal({
@@ -39,7 +37,10 @@ const ImageEditorState = () => {
   };
 
   const setLoading = () => {
-    setModal((IsLoading) => !IsLoading);
+    setModal({
+      ...modal,
+      loading: false,
+    });
   };
 
   return [

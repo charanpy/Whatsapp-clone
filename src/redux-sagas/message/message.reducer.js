@@ -87,6 +87,8 @@ const ChannelReducer = (state = initialState, action) => {
         },
       };
 
+    case MessageActionTypes.CLEAR_UP_MESSAGE:
+      return initialState;
     default:
       return state;
   }

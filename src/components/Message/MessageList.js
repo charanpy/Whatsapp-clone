@@ -11,7 +11,6 @@ import {
 import Image from '../shared/Image/Image';
 
 const MessageList = ({ message, position, timestamp, seen }) => {
-  console.log(position, seen);
   return (
     <MessageContainer position={position}>
       <MessageWrap position={position}>

@@ -27,8 +27,6 @@ const Notification = ({
     currentGroup,
     getRealtimeNotify
   );
-  console.log(msg, 7768);
-  /* eslint-disable */
 
   return (
     <Notify>
@@ -40,13 +38,14 @@ const Notification = ({
 
 Notification.propTypes = {
   getNotificationStart: PropTypes.func.isRequired,
-  groupId: PropTypes.string.isRequired,
+  groupId: PropTypes.string,
   currentGroup: PropTypes.string,
   getRealtimeNotificationStart: PropTypes.func.isRequired,
 };
 
 Notification.defaultProps = {
   currentGroup: null,
+  groupId: null,
 };
 /* eslint-disable */
 const mapStateToProps = (state, otherProps) => ({

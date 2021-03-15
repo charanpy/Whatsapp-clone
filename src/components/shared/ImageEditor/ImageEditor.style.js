@@ -12,7 +12,7 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 1000000;
 `;
 
 export const ButtonContainer = styled.div`

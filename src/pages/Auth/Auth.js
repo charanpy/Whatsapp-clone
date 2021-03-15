@@ -15,15 +15,8 @@ import {
 import { googleSignInStart } from '../../redux-sagas/user/user.action';
 import WhatsappIcon from '../../assets/Whatsapp.png';
 import { selectIsUserAuthenticated } from '../../redux-sagas/user/user.selector';
-import AuthState from './Auth.state';
-/* eslint-disable */
-const Auth = ({
-  googleSignInStart: googleSignIn,
-  isAuthenticated,
-  history,
-}) => {
-  // eslint-disable-next-line
-  AuthState(isAuthenticated, history);
+
+const Auth = ({ googleSignInStart: googleSignIn, isAuthenticated }) => {
   return (
     <>
       {isAuthenticated && <Redirect to='/' />}

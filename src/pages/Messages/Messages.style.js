@@ -10,7 +10,6 @@ const MessageContainer = styled.section`
   flex-direction: column;
   border-left: ${(props) =>
     props.theme.mode ? '1px solid #EDEDED' : '1px solid #2A2F32'};
-  /* position: relative; */
   background-position: center;
   background-size: contain;
   opacity: 1;
@@ -22,6 +21,7 @@ const MessageContainer = styled.section`
         ? `
       position: absolute;
       width: 100vw;
+      height: 100vh;
       opacity: 1;
   transition: all 500ms linear;
 
@@ -30,6 +30,20 @@ const MessageContainer = styled.section`
   transition: all 500ms linear;
 
     opacity: 0;
+      display: none;
+    `}
+  }
+
+  @media (max-width: 650px) and (orientation: landscape) {
+    ${({ channel }) =>
+      channel
+        ? `
+      position: absolute;
+      width: 100vw;
+      opacity: 1;
+      transition: all 500ms linear;
+       `
+        : `
       display: none;
     `}
   }

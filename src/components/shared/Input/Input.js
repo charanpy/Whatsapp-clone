@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Input, Icon } from './Input.style';
 
 const InputContainer = (props, ref) => {
-  console.log(props);
   return (
     <>
       <Input {...props} ref={ref} />

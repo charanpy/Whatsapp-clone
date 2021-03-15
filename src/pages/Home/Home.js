@@ -12,7 +12,6 @@ import UseHomeState from './Home.state';
 
 const Home = ({ userId, displayChatListStart: displayChat }) => {
   UseHomeState(userId, displayChat);
-  console.log('Home render');
   return (
     <HomeContainer>
       <ChatList />

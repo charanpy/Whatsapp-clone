@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getRef } from '../../firebase/firebase';
+import { getRef, auth } from '../../firebase/firebase';
 
 const NotificationState = (
   getNotification,
@@ -9,10 +9,13 @@ const NotificationState = (
   getRealtimeNotification
 ) => {
   useEffect(() => {
-    getNotification(groupId, uid);
+    if (auth?.currentUser?.uid) {
+      getNotification(groupId, uid);
+    }
   }, [getNotification, groupId, uid]);
 
   useEffect(() => {
+    if (!groupId) return false;
     const groupRef = getRef(`groups/${groupId}`);
     let listenToMsg;
     let listen;

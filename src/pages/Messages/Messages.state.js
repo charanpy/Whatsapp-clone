@@ -30,7 +30,6 @@ const MessageState = (
 
   useEffect(() => {
     const groupRef = getRef('groups');
-    console.log('err');
     let listen;
     if (groupId) {
       listen = groupRef
@@ -47,25 +46,21 @@ const MessageState = (
         });
     }
     return () =>
-      // eslint-disable-next-line
       groupId &&
       groupRef.child(`${groupId}/messages`).off('child_added', listen);
   }, [channel, groupId, getRealtime, currentUserId]);
 
   useEffect(() => {
     const groupRef = getRef(`groups/${groupId}/messages`);
-    console.log('err');
     let listen;
     if (groupId) {
       listen = groupRef.orderByChild('seen').on('child_changed', (snap) => {
-        console.log(snap.val(), 'ooops');
         if (snap.val()?.seen) {
           setSeen(snap.val().key);
         }
       });
     }
     return () =>
-      // eslint-disable-next-line
       groupId &&
       groupRef.child(`${groupId}/messages`).off('child_changed', listen);
   }, [channel, groupId, getRealtime, setSeen]);

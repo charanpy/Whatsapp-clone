@@ -4,6 +4,12 @@ html,body{
   padding: 0;
   margin:0;
   box-sizing: border-box;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  display: none;
+  width: 0px;
 }
 
 a{

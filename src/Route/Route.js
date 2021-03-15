@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from '../pages/Home/Home';
-import Auth from '../pages/Auth/Auth.container';
 import PrivateRoute from './PrivateRoute';
-import Profile from '../pages/EditProfile/Profile';
+import Spinner from '../components/Spinner/SpinnerOverlay';
+import ErrorBoundary from '../components/error-boundary/Error-boundary';
+
+const Home = lazy(() => import('../pages/Home/Home'));
+const Auth = lazy(() => import('../pages/Auth/Auth.container'));
+const Profile = lazy(() => import('../pages/EditProfile/Profile'));
 
 const AppRoute = () => (
   <Switch>
-    <PrivateRoute exact path='/' component={Home} />
-    <Route exact path='/signin' component={Auth} />
-    <PrivateRoute path='/edit' component={Profile} />
+    <ErrorBoundary>
+      <Suspense fallback={<Spinner />}>
+        <PrivateRoute exact path='/' component={Home} />
+        <Route exact path='/signin' component={Auth} />
+        <PrivateRoute path='/edit' component={Profile} />
+      </Suspense>
+    </ErrorBoundary>
   </Switch>
 );
 

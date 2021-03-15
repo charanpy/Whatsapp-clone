@@ -13,7 +13,6 @@ import { InputWrapper } from '../shared/Input/Input.style';
 
 const ChatContainer = ({ channels, isLoading }) => {
   const [searchField, onHandleChange, chatList, input] = UseChatState();
-  console.log('chatContainer');
   return (
     <>
       <InputWrapper>

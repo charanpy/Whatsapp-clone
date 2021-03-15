@@ -28,7 +28,6 @@ const Messages = ({
   deleteNotificationStart: deleteNotification,
   setCurrentChannelNullStart: setChannelNull,
 }) => {
-  console.log('Message', channel, currentUserId);
   UseMessageState(
     channel,
     currentUserId,

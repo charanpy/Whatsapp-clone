@@ -44,11 +44,9 @@ const MessageInput = ({
     blob,
     OnUnMountModal
   );
-  console.log('MessageInput');
   return (
     <Footer>
       <Icon as='button' className='far fa-laugh' />
-      {/* eslint-disable-next-line */}
       <label htmlFor='send_file'>
         <Icon className='fas fa-paperclip' />
       </label>
@@ -89,7 +87,6 @@ MessageInput.defaultProps = {
 
 const mapDispatchToProps = (dispatch) => ({
   addMessageStart: (groupId, currentUserId, receiverId, message) =>
-    // eslint-disable-next-line
     dispatch(addMessageStart({ groupId, currentUserId, receiverId, message })),
 });
 

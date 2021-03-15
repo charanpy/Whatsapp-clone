@@ -70,6 +70,8 @@ const ChannelReducer = (state = initialState, action) => {
           groupId: action.payload,
         },
       };
+    case channelActionTypes.UNSUBSCRIBE_CHANNEL:
+      return initialState;
     default:
       return state;
   }

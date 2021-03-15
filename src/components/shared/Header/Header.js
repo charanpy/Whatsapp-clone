@@ -12,6 +12,7 @@ import IconContainer from '../Icon/Icon';
 import { ChatName } from '../../Chat/Chat.style';
 import ActiveUser from '../../ActiveUser/ActiveUser';
 import Navigate from '../Navigate/Navigate';
+import ModalProvider from '../context/Modal';
 
 const Header = ({
   icon1,
@@ -22,25 +23,26 @@ const Header = ({
   position,
   onClick,
 }) => {
-  console.log('Header');
   return (
-    <HeaderContainer position={position}>
-      <ImageContainer>
-        <ProfileImage chatProfile={chatProfile} />
-        {text && (
-          <ChatDetailWrapper>
-            <ChatName>{label}</ChatName>
-            <ActiveUser />
-          </ChatDetailWrapper>
-        )}
-      </ImageContainer>
-      <OptionsContainer>
-        <Navigate navigateTo='/edit' iconName={icon1} />
-        <Menu as='button' onClick={onClick}>
-          <IconContainer as='button' className={icon2} />
-        </Menu>
-      </OptionsContainer>
-    </HeaderContainer>
+    <ModalProvider>
+      <HeaderContainer position={position}>
+        <ImageContainer>
+          <ProfileImage chatProfile={chatProfile} />
+          {text && (
+            <ChatDetailWrapper>
+              <ChatName>{label}</ChatName>
+              <ActiveUser />
+            </ChatDetailWrapper>
+          )}
+        </ImageContainer>
+        <OptionsContainer>
+          <Navigate navigateTo='/edit' iconName={icon1} />
+          <Menu as='button' onClick={onClick}>
+            <IconContainer as='button' className={icon2} />
+          </Menu>
+        </OptionsContainer>
+      </HeaderContainer>
+    </ModalProvider>
   );
 };
 

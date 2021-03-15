@@ -8,7 +8,6 @@ import { selectMessage } from '../../redux-sagas/message/message.selector';
 import UseMsgState from './Message.state';
 import { ChatContainer } from './Message.style';
 import MessageList from './MessageList';
-/* eslint-disable */
 
 const Message = ({ channel, currentUserId, messages }) => {
   const messagesArray = messages ? Object.values(messages) : [];

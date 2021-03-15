@@ -4,17 +4,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectUserId } from '../../redux-sagas/user/user.selector';
 import { selectCurrentChannel } from '../../redux-sagas/channels/channels.selector';
-// import { setCurrentChannelNullStart } from '../../redux-sagas/channels/channels.action';
 import TestPanel from '../../components/TestPanel/TestPanel';
 import Messages from '../Messages/Messages.container';
 import { ChannelPropTypes } from '../../helpers/PropTypeValues';
 
-const ChatPanel = ({
-  currentUserId,
-  // setCurrentChannelNullStart: currentChannelToNull,
-  channel,
-}) => {
-  console.log('ChatPanels');
+const ChatPanel = ({ currentUserId, channel }) => {
   return channel ? (
     <Messages channel={channel} currentUserId={currentUserId} />
   ) : (
@@ -24,7 +18,6 @@ const ChatPanel = ({
 
 ChatPanel.propTypes = {
   currentUserId: PropTypes.string.isRequired,
-  // setCurrentChannelNullStart: PropTypes.func.isRequired,
   channel: ChannelPropTypes,
 };
 

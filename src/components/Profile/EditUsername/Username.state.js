@@ -19,7 +19,7 @@ const UsernameState = (currentUserId, username) => {
       .update({
         displayName: inputRef?.current?.value,
       })
-      .then()
+      .then(() => alert('Successfully updated'))
       .catch(() => {
         alert('Something went wrong!Please try again');
       });

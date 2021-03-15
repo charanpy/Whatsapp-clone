@@ -1,4 +1,5 @@
-import { getRef, timestamp } from './firebase';
+import { getRef, timestamp, storage, auth } from './firebase';
+import { generateUniqueUid, metaData } from '../helpers/helpers';
 
 export const checkChannelExist = async (
   currentId,
@@ -7,7 +8,6 @@ export const checkChannelExist = async (
 ) => {
   const channelRef = getRef(`channels/${currentId}`);
   const channel = await channelRef.child(receiverId).once('value');
-  console.log(channel.key, 'ex', channel.exists() && channel.key === channelId);
   if (!channelId) return channel.exists();
   return channel.exists() && channel.key === channelId;
 };
@@ -15,7 +15,6 @@ export const checkChannelExist = async (
 export const createChannel = async (currentUserId, receiverId) => {
   try {
     const groupRef = getRef('groups');
-    console.log('fu');
     const currentUserChannel = getRef(`/channels/${currentUserId}`);
     const receiverChannel = getRef(`/channels/${receiverId}`);
 
@@ -42,7 +41,6 @@ export const createChannel = async (currentUserId, receiverId) => {
     });
     return key;
   } catch (e) {
-    console.log(e, 'oops');
     return false;
   }
 };
@@ -73,7 +71,6 @@ export const getMessagesFromDb = async (groupId) => {
   const groupRef = getRef(`groups/${groupId}`);
   const groupMsg = await groupRef.child('messages').once('value');
   const messages = groupMsg.val();
-  console.log(messages, '1');
   if (!messages) return null;
   const messagesKey = Object.keys(messages).map((val) => {
     return { ...messages[val], key: val };
@@ -88,8 +85,6 @@ export const setSeen = (channel, currentUserId) => {
     .orderByChild('receiver')
     .equalTo(`${currentUserId}false`)
     .once('value', (snapshot) => {
-      console.log(snapshot.val(), 'fu');
-
       if (snapshot.val()) {
         snapshot.forEach((child) => {
           child.ref.update({
@@ -108,7 +103,51 @@ export const getNotifications = async (groupId, currentUserId) => {
     .orderByChild('receiver')
     .equalTo(`${currentUserId}false`)
     .once('value');
-  const notifications = fetchNotification.val();
-  console.log(notifications, 333);
-  return notifications ? Object.values(notifications) : [];
+  return fetchNotification.val() ? Object.values(fetchNotification.val()) : [];
+};
+
+export const changeProfilePicture = async (photoURL, unMount) => {
+  try {
+    const userRef = getRef('users');
+    const userId = auth?.currentUser?.uid;
+    if (userId) {
+      userRef.child(userId).update({
+        photoURL,
+      });
+      unMount();
+    }
+    unMount();
+  } catch (e) {
+    alert('Something went wrong!Please try again');
+  }
+};
+
+export const sendImageFb = (
+  imageFile,
+  setLoading,
+  unMountModal,
+  storeImage
+) => {
+  const id = generateUniqueUid();
+  const storageRef = storage
+    .ref()
+    .child(`public/${id}`)
+    .put(imageFile, metaData);
+  storageRef.on(
+    'state_changed',
+    () => {
+      setLoading();
+    },
+    () => {
+      alert('Image upload Failed.Please try again');
+      setLoading();
+      unMountModal();
+    },
+    () => {
+      storageRef.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        storeImage(downloadURL);
+        unMountModal();
+      });
+    }
+  );
 };

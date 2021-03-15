@@ -9,10 +9,8 @@ import useActiveState from './ActiveUser.state';
 
 const ActiveUser = ({ id }) => {
   const status = useActiveState(id);
-  console.log(status, 'status');
   return (
     <Notification>
-      {/* eslint-disable-next-line */}
       {status &&
         (status.state === 'online'
           ? status.state

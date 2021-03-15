@@ -6,4 +6,9 @@ export const ImageContainer = styled.img`
   border-radius: calc(${(props) => props.height}rem / 2);
 `;
 
-export const test = styled.div``;
+export const Button = styled.button`
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+`;

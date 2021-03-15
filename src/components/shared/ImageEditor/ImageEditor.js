@@ -1,9 +1,7 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import AvatarEditor from 'react-avatar-editor';
 import {
-  ModalContainer,
   Editor,
   CloseButton,
   Close,
@@ -11,7 +9,7 @@ import {
 } from './ImageEditor.style';
 import Button from '../Button/Button';
 import Spinner from '../../Spinner/SpinnerComponent';
-/* eslint-disable */
+import Modal from '../Modal/Modal';
 
 const ImageEditor = ({
   visible,
@@ -24,47 +22,46 @@ const ImageEditor = ({
   croppedImage,
   sendImage,
 }) => {
-  console.log(visible, loading);
   return (
-    <CSSTransition in={visible} timeout={500} classNames='fade' unmountOnExit>
-      <ModalContainer>
-        <Editor>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <>
-              {!croppedImage ? (
-                <AvatarEditor
-                  ref={editorRef}
-                  image={image}
-                  width={200}
-                  height={200}
-                  border={50}
-                  scale={1.5}
-                />
+    <Modal visible={visible}>
+      <Editor>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {!croppedImage ? (
+              <AvatarEditor
+                ref={editorRef}
+                image={image}
+                width={200}
+                height={200}
+                border={50}
+                scale={1.5}
+              />
+            ) : (
+              <img
+                src={croppedImage}
+                width='200'
+                height='200'
+                alt='croppedImage'
+              />
+            )}
+            <ButtonContainer>
+              <Button danger content='CLOSE' onClick={closeModal} />
+
+              {croppedImage ? (
+                <Button content={content} onClick={sendImage} />
               ) : (
-                <img
-                  src={croppedImage}
-                  width='200'
-                  height='200'
-                  alt='croppedImage'
-                />
-              )}
-              <ButtonContainer>
-                <Button danger content='CLOSE' onClick={closeModal} />
                 <Button content='CROP' onClick={handleCrop} />
-                {croppedImage && (
-                  <Button content={content} onClick={sendImage} />
-                )}
-              </ButtonContainer>
-              <CloseButton onClick={closeModal}>
-                <Close>&#10006;</Close>
-              </CloseButton>
-            </>
-          )}
-        </Editor>
-      </ModalContainer>
-    </CSSTransition>
+              )}
+            </ButtonContainer>
+            <CloseButton onClick={closeModal}>
+              <Close>&#10006;</Close>
+            </CloseButton>
+          </>
+        )}
+      </Editor>
+    </Modal>
   );
 };
 ImageEditor.propTypes = {
@@ -76,6 +73,11 @@ ImageEditor.propTypes = {
   loading: PropTypes.bool.isRequired,
   croppedImage: PropTypes.string,
   sendImage: PropTypes.func.isRequired,
+  editorRef: PropTypes.shape({
+    current: PropTypes.shape({
+      value: PropTypes.elementType,
+    }),
+  }).isRequired,
 };
 
 ImageEditor.defaultProps = {

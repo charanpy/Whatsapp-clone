@@ -29,9 +29,7 @@ const Home = (userId, displayChat) => {
       .orderByChild('createdAt')
       .startAt(Date.now())
       .on('child_added', (snap) => {
-        console.log(snap.val(), 'ooo');
         if (snap.val()) {
-          console.log('saga');
           displayChat([snap.val()]);
         }
       });

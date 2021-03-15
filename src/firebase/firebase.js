@@ -40,28 +40,13 @@ export const getRef = (parent) => database.ref(parent);
 
 // auth
 export const signInWithGoogle = async () => {
-  try {
-    const { user } = await auth.signInWithPopup(googleProvider);
-    // eslint-disable-next-line
-    const { displayName, uid, photoURL, email } = user;
-    return {
-      displayName,
-      uid,
-      photoURL,
-      email,
-    };
-  } catch (e) {
-    return e;
-  }
+  const res = await auth.signInWithPopup(googleProvider);
+  return res;
 };
 
 export const signOut = async () => {
-  try {
-    const res = await auth.signOut();
-    return res;
-  } catch (e) {
-    return e;
-  }
+  const res = await auth.signOut();
+  return res;
 };
 
 export const getUser = async (userPayload) => {
@@ -70,22 +55,18 @@ export const getUser = async (userPayload) => {
   return user.val();
 };
 export const createUserDocument = async (userDetails) => {
-  // console.log('func', userDetails);
   if (!userDetails?.uid) return {};
 
   try {
     const userRef = database.ref(`users/${userDetails?.uid}`);
-    console.log('hi', userRef);
     const user = await userRef.once('value');
     if (user.exists()) {
-      console.log(user.val(), 'ex');
       return user.val();
     }
     const addUser = await userRef.set({
       ...userDetails,
       groups: [],
     });
-    console.log(addUser, 'no');
     return addUser;
   } catch (e) {
     return e;
@@ -104,7 +85,6 @@ export const searchUser = async (username) => {
 
     return users.val();
   } catch (e) {
-    console.log(e);
     return e;
   }
 };
@@ -150,14 +130,11 @@ export const addedChannelsList = async (currentUserId) => {
     return null;
   });
   const privateChannels = await Promise.all(channelsList);
-  console.log(privateChannels, 'users');
   return privateChannels;
 };
 
 export const getChannelsList = async (usersArray) => {
-  console.log(111, usersArray);
   const channelsList = usersArray.map(async ({ userId, groupId, type }) => {
-    console.log(222, type, userId);
     if (type === 'private') {
       const user = await getUserDetail(userId, groupId);
       return user;
@@ -165,10 +142,5 @@ export const getChannelsList = async (usersArray) => {
     return null;
   });
   const privateChannels = await Promise.all(channelsList);
-  // console.log(privateChannels, 'users');
   return privateChannels;
 };
-
-// export const addChannel = async ({groupId}) => {
-
-// }

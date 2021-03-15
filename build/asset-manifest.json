@@ -1,23 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.8dc0b19f.chunk.css",
-    "main.js": "/static/js/main.e197aa70.chunk.js",
-    "main.js.map": "/static/js/main.e197aa70.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.d62c2a9c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.d62c2a9c.js.map",
-    "static/js/2.5cfd540b.chunk.js": "/static/js/2.5cfd540b.chunk.js",
-    "static/js/2.5cfd540b.chunk.js.map": "/static/js/2.5cfd540b.chunk.js.map",
+    "static/js/0.2e95607e.chunk.js": "/static/js/0.2e95607e.chunk.js",
+    "static/js/0.2e95607e.chunk.js.map": "/static/js/0.2e95607e.chunk.js.map",
+    "main.css": "/static/css/main.5bb800bb.chunk.css",
+    "main.js": "/static/js/main.db8972dd.chunk.js",
+    "main.js.map": "/static/js/main.db8972dd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.829b54cf.js",
+    "runtime-main.js.map": "/static/js/runtime-main.829b54cf.js.map",
+    "static/js/3.ab4abc78.chunk.js": "/static/js/3.ab4abc78.chunk.js",
+    "static/js/3.ab4abc78.chunk.js.map": "/static/js/3.ab4abc78.chunk.js.map",
+    "static/js/4.5e248af2.chunk.js": "/static/js/4.5e248af2.chunk.js",
+    "static/js/4.5e248af2.chunk.js.map": "/static/js/4.5e248af2.chunk.js.map",
+    "static/js/5.23ce4ed6.chunk.js": "/static/js/5.23ce4ed6.chunk.js",
+    "static/js/5.23ce4ed6.chunk.js.map": "/static/js/5.23ce4ed6.chunk.js.map",
+    "static/js/6.6162cbbf.chunk.js": "/static/js/6.6162cbbf.chunk.js",
+    "static/js/6.6162cbbf.chunk.js.map": "/static/js/6.6162cbbf.chunk.js.map",
+    "static/js/7.bda05df5.chunk.js": "/static/js/7.bda05df5.chunk.js",
+    "static/js/7.bda05df5.chunk.js.map": "/static/js/7.bda05df5.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.8dc0b19f.chunk.css.map": "/static/css/main.8dc0b19f.chunk.css.map",
-    "static/js/2.5cfd540b.chunk.js.LICENSE.txt": "/static/js/2.5cfd540b.chunk.js.LICENSE.txt",
+    "static/css/main.5bb800bb.chunk.css.map": "/static/css/main.5bb800bb.chunk.css.map",
+    "static/js/3.ab4abc78.chunk.js.LICENSE.txt": "/static/js/3.ab4abc78.chunk.js.LICENSE.txt",
     "static/media/Whatsapp.02a723ea.png": "/static/media/Whatsapp.02a723ea.png",
     "static/media/chat-dark.8cbc68b3.png": "/static/media/chat-dark.8cbc68b3.png",
     "static/media/chat-light.bded4f44.png": "/static/media/chat-light.bded4f44.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.d62c2a9c.js",
-    "static/js/2.5cfd540b.chunk.js",
-    "static/css/main.8dc0b19f.chunk.css",
-    "static/js/main.e197aa70.chunk.js"
+    "static/js/runtime-main.829b54cf.js",
+    "static/js/3.ab4abc78.chunk.js",
+    "static/css/main.5bb800bb.chunk.css",
+    "static/js/main.db8972dd.chunk.js"
   ]
 }

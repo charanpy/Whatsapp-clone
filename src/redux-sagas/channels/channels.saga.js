@@ -15,9 +15,7 @@ import { createChannel } from '../../firebase/channels';
 
 export function* getChannel({ payload }) {
   try {
-    yield console.log('payload', payload);
     const channelLists = yield call(getChannelsList, payload);
-    yield console.log(11, channelLists);
     yield put(displayChatListSuccess(channelLists));
   } catch (e) {
     console.log(e);
@@ -31,9 +29,7 @@ export function* OnDisplayChannelLists() {
 
 export function* getAddedChannel({ payload }) {
   try {
-    yield console.log('payload', payload);
     const channelLists = yield call(addedChannelsList, payload);
-    yield console.log(11, channelLists);
     yield put(displayAddedChatSuccess(channelLists));
   } catch (e) {
     console.log(e);
@@ -50,12 +46,10 @@ export function* onDisplayAddedChannel() {
 
 export function* OnCreateChannel({ payload }) {
   try {
-    yield console.log(payload);
     const { currentUserId, receiverId } = payload;
     const groupId = yield call(createChannel, currentUserId, receiverId);
     yield put(createChannelSuccess(groupId));
   } catch (e) {
-    console.log(e, 'oo');
     yield put(createChannelFailure());
   }
 }
@@ -65,7 +59,6 @@ export function* onCreateChannelStart() {
 }
 
 export function* setCurrentChannel({ payload }) {
-  console.log(payload, 'chann');
   yield put(setCurrentChannelSuccess(payload));
 }
 

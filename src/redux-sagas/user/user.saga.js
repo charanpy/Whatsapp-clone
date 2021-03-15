@@ -7,18 +7,27 @@ import {
   createUserDocument,
   getUser,
 } from '../../firebase/firebase';
+import { clearUpMessage } from '../message/message.action';
+import { unsubscribeChannel } from '../channels/channels.action';
+
+const getUserDetail = (user) => {
+  const { displayName, uid, photoURL, email } = user;
+  return {
+    displayName,
+    uid,
+    photoURL,
+    email,
+  };
+};
 
 export function* googleSignIn() {
   try {
-    const userDetails = yield call(signInWithGoogle);
-    console.log(userDetails, 21);
-    const res = yield call(createUserDocument, userDetails);
-    console.log(res);
-    // yield put(userAction.googleSignInSuccess())
+    const { user } = yield call(signInWithGoogle);
+    const userDetails = yield call(getUserDetail, user);
+    yield call(createUserDocument, userDetails);
+    yield put(userAction.googleSignInSuccess());
   } catch (error) {
-    console.log(error);
-    // eslint-disable-next-line
-    alert(error.message);
+    alert(error?.message || error);
     yield put(userAction.googleSignInFailure());
   }
 }
@@ -30,6 +39,8 @@ export function* onGoogleSignInStart() {
 export function* signOut() {
   try {
     yield call(logout);
+    yield put(unsubscribeChannel());
+    yield put(clearUpMessage());
     yield put(userAction.signOutSuccess());
   } catch (error) {
     console.log(error);

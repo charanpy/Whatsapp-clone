@@ -85,3 +85,11 @@ export const deleteNotificationSuccess = (message) => ({
   type: MessageActionTypes.DELETE_NOTIFICATION_SUCCESS,
   payload: message,
 });
+
+export const clearUpMessage = () => ({
+  type: MessageActionTypes.CLEAR_UP_MESSAGE,
+});
+
+export const unsubscribeNotification = () => ({
+  type: MessageActionTypes.UNSUBSCRIBE_NOTIFICATION,
+});

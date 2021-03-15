@@ -11,18 +11,23 @@ import EditUsername from '../../components/Profile/EditUsername/Username';
 import Theme from '../../components/Profile/Theme/Theme';
 import UseProfileState from './Profile.state';
 import { ProfileContainer, NavigateContainer } from './Profile.style';
+import Logout from '../../components/shared/Logout/Logout';
+import ModalProvider from '../../components/shared/context/Modal';
 
 const Profile = ({ changeProfileStart: changeProfile, userId }) => {
   UseProfileState(changeProfile, userId);
   return (
     <ProfileContainer>
-      <ProfileImage height={8} />
+      <ModalProvider>
+        <ProfileImage height={8} />
+      </ModalProvider>
       <EditImage />
       <EditUsername />
       <NavigateContainer>
         <Navigate navigateTo='/' iconName='fas fa-arrow-left' />
       </NavigateContainer>
       <Theme />
+      <Logout />
     </ProfileContainer>
   );
 };
