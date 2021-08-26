@@ -1,11 +1,13 @@
 # Whatsapp-clone
 
+Simple private chat whatsapp ui
+
 ## React Firebase
 
-### sign in with google
-### Display Users
-### Private chat
-### Active status
-### Realtime Notifications
-### Crop images
-### Blue tick functionality
+1. sign in with google
+2. Display Users
+3. Private chat
+4. Active status
+5. Realtime Notifications
+6. Crop images
+7. Blue tick functionality
